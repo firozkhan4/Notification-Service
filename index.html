@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+
+    <button id="notification-button" >Notification</button>
+    <ul id="notification-list">
+
+    </ul>
+
+    <script type="module">
+    import { io } from "https://cdn.socket.io/4.8.1/socket.io.esm.min.js";
+
+    const notificationList = document.getElementById("notification-list");
+    const renderList = (notifications) => {
+      notifications.forEach((notification) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = notification.title;
+        notificationList.appendChild(listItem);
+      });
+    }
+
+    const notificationButton = document.getElementById("notification-button");
+    const socket = io("ws://localhost:4005");
+
+    socket.on("notifications", (notifications) => {
+      renderList(notifications);
+    });
+
+
+    socket.on("read-notifications",(notifications)=>{
+      console.log("Notification read:", notifications);
+    })
+
+    document.addEventListener("DOMContentLoaded", () => {
+      socket.emit("new-user", "680a47b9452f0978827a8bc4");
+    });
+
+    notificationButton.addEventListener("click", () => {
+      console.log("Notification button clicked");
+      socket.emit("notification-read", "680a47b9452f0978827a8bc4");
+    });
+    </script>
+  </body>
+</html>
