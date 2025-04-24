@@ -8,7 +8,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "MIT",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
