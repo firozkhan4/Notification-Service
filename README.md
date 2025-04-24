@@ -1,7 +1,4 @@
 
----
-
-```markdown
 # 📡 Real-Time Notification System
 
 A real-time notification backend built with **Node.js**, **Express**, **MongoDB**, and **Socket.IO**. Users receive live notifications related to their posts, which are saved and delivered via WebSockets.
